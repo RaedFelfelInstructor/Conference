@@ -1,0 +1,120 @@
+﻿@model Conference.Models.Registration
+@{
+    ViewData["Title"] = "Conference Registration";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">Register for the Tech Summit 2025</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Register" method="post" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter your full name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Company" class="form-label"></label>
+                    <input asp-for="Company" class="form-control" placeholder="Enter your company name" />
+                    <span asp-validation-for="Company" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Track" class="form-label"></label>
+                    <select asp-for="Track" asp-items="@(new SelectList(ViewBag.Tracks, "Value", "Text"))" class="form-select">
+                        <option value="">-- Select a Track --</option>
+                    </select>
+                    <span asp-validation-for="Track" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="form-label">Workshop Preferences (select all that interest you)</label>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="Workshops" id="workshop-intro" value="intro">
+                        <label class="form-check-label" for="workshop-intro">
+                            Introduction to ASP.NET MVC
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="Workshops" id="workshop-advanced" value="advanced">
+                        <label class="form-check-label" for="workshop-advanced">
+                            Advanced MVC Techniques
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="Workshops" id="workshop-api" value="api">
+                        <label class="form-check-label" for="workshop-api">
+                            Building Web APIs
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="DietaryPreference" class="form-label"></label>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" asp-for="DietaryPreference" type="radio" id="diet-none" value="none" checked>
+                        <label class="form-check-label" for="diet-none">
+                            No special requirements
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" asp-for="DietaryPreference" type="radio" id="diet-vegetarian" value="vegetarian">
+                        <label class="form-check-label" for="diet-vegetarian">
+                            Vegetarian
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" asp-for="DietaryPreference" type="radio" id="diet-vegan" value="vegan">
+                        <label class="form-check-label" for="diet-vegan">
+                            Vegan
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="DietaryPreference" type="radio" id="diet-gluten" value="gluten-free">
+                        <label class="form-check-label" for="diet-gluten">
+                            Gluten-free
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Comments" class="form-label"></label>
+                    <textarea asp-for="Comments" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0 fs-5">Registration Information</h3>
+                </div>
+                <div class="card-body">
+                    <p>Please complete the registration form to secure your spot at the conference.</p>
+                    <p>Early bird registration ends on May 1, 2025.</p>
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="mailto:info@techsummit2025.com" class="btn btn-outline-primary">
+                            <i class="bi bi-envelope me-2"></i>Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

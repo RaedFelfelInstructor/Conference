@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@ViewBag.ConferenceName</h1>
+    <p class="lead">Join us for the premier tech conference of the year!</p>
+    <p>
+        <strong>When:</strong> @ViewBag.ConferenceDate<br />
+        <strong>Where:</strong> @ViewBag.ConferenceLocation
+    </p>
+    <p>
+        @Html.ActionLink("Register Now", "Register", "Home", null, new { @class = "btn btn-primary btn-lg" })
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Keynote Speakers</h2>
+        <p>
+            Hear from industry leaders about the future of technology and innovation.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Workshops</h2>
+        <p>
+            Participate in hands-on workshops covering the latest tools and techniques.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Networking</h2>
+        <p>
+            Connect with peers and industry experts to expand your professional network.
+        </p>
+    </div>
+</div>

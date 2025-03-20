@@ -1,0 +1,187 @@
+﻿@model Conference.Models.Registration
+@{
+    ViewBag.Title = "Registration Confirmation";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2 class="panel-title">Registration Confirmed!</h2>
+    </div>
+    <div class="panel-body">
+        <p>Thank you for registering for Tech Summit 2025. Your registration has been received.</p>
+        <p>
+            <!-- Tag Helper approach -->
+            <strong>Registration ID:</strong> @Model.ID<br />
+            <strong>Registration Date:</strong> @Model.RegistrationDate.ToString("MMM dd, yyyy hh:mm tt")
+
+            <!-- HTML Helper approach (commented) -->
+            @* <strong>Registration ID:</strong> @Html.DisplayFor(m => m.ID)<br />
+            <strong>Registration Date:</strong> @Html.DisplayFor(m => m.RegistrationDate) *@
+        </p>
+    </div>
+</div>
+
+<h3>Your Registration Details</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- Tag Helper approach -->
+        <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Email</dt>
+            <dd>@Model.Email</dd>
+
+            <dt>Company</dt>
+            <dd>@Model.Company</dd>
+
+            <dt>Track</dt>
+            <dd>
+                @{
+                    var trackName = "";
+                    switch (Model.Track)
+                    {
+                        case "web": trackName = "Web Development"; break;
+                        case "mobile": trackName = "Mobile Development"; break;
+                        case "cloud": trackName = "Cloud Computing"; break;
+                        case "data": trackName = "Data Science"; break;
+                        case "devops": trackName = "DevOps"; break;
+                    }
+                }
+                @trackName
+            </dd>
+        </dl>
+
+        <!-- HTML Helper approach (commented) -->
+        @* <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Name)</dt>
+        <dd>@Html.DisplayFor(m => m.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Email)</dt>
+        <dd>@Html.DisplayFor(m => m.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Company)</dt>
+        <dd>@Html.DisplayFor(m => m.Company)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Track)</dt>
+        <dd>
+        @{
+        var trackName = "";
+        switch (Model.Track)
+        {
+        case "web": trackName = "Web Development"; break;
+        case "mobile": trackName = "Mobile Development"; break;
+        case "cloud": trackName = "Cloud Computing"; break;
+        case "data": trackName = "Data Science"; break;
+        case "devops": trackName = "DevOps"; break;
+        }
+        }
+        @trackName
+        </dd>
+        </dl> *@
+    </div>
+
+    <div class="col-md-6">
+        <!-- Tag Helper approach -->
+        <dl class="dl-horizontal">
+            <dt>Workshops</dt>
+            <dd>
+                @if (Model.Workshops != null && Model.Workshops.Any())
+                {
+                    <ul>
+                        @foreach (var workshop in Model.Workshops)
+                        {
+                            var workshopName = "";
+                            switch (workshop)
+                            {
+                                case "intro": workshopName = "Introduction to ASP.NET MVC"; break;
+                                case "advanced": workshopName = "Advanced MVC Techniques"; break;
+                                case "api": workshopName = "Building Web APIs"; break;
+                            }
+                            <li>@workshopName</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>No workshops selected</span>
+                }
+            </dd>
+
+            <dt>Dietary Preference</dt>
+            <dd>
+                @{
+                    var dietName = "";
+                    switch (Model.DietaryPreference)
+                    {
+                        case "none": dietName = "No special requirements"; break;
+                        case "vegetarian": dietName = "Vegetarian"; break;
+                        case "vegan": dietName = "Vegan"; break;
+                        case "gluten-free": dietName = "Gluten-free"; break;
+                    }
+                }
+                @dietName
+            </dd>
+
+            <dt>Comments</dt>
+            <dd>@(string.IsNullOrEmpty(Model.Comments) ? "No comments provided" : Model.Comments)</dd>
+        </dl>
+
+        <!-- HTML Helper approach (commented) -->
+        @* <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Workshops)</dt>
+        <dd>
+        @if (Model.Workshops != null && Model.Workshops.Any())
+        {
+        <ul>
+        @foreach (var workshop in Model.Workshops)
+        {
+        var workshopName = "";
+        switch (workshop)
+        {
+        case "intro": workshopName = "Introduction to ASP.NET MVC"; break;
+        case "advanced": workshopName = "Advanced MVC Techniques"; break;
+        case "api": workshopName = "Building Web APIs"; break;
+        }
+        <li>@workshopName</li>
+        }
+        </ul>
+        }
+        else
+        {
+        <span>No workshops selected</span>
+        }
+        </dd>
+
+        <dt>@Html.DisplayNameFor(m => m.DietaryPreference)</dt>
+        <dd>
+        @{
+        var dietName = "";
+        switch (Model.DietaryPreference)
+        {
+        case "none": dietName = "No special requirements"; break;
+        case "vegetarian": dietName = "Vegetarian"; break;
+        case "vegan": dietName = "Vegan"; break;
+        case "gluten-free": dietName = "Gluten-free"; break;
+        }
+        }
+        @dietName
+        </dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Comments)</dt>
+        <dd>@Html.DisplayFor(m => m.Comments)</dd>
+        </dl> *@
+    </div>
+</div>
+
+<div class="text-center">
+    <!-- Tag Helper approach -->
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
+
+    <!-- HTML Helper approach (commented) -->
+    @* <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Return to Home</a> *@
+
+    <!-- Or alternatively: -->
+    @* @Html.ActionLink("Return to Home", "Index", "Home", null, new { @class = "btn btn-primary" }) *@
+</div>
